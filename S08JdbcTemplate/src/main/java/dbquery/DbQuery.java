@@ -22,6 +22,8 @@ public class DbQuery {
 		Connection conn = null;
 		try {
 			conn = dataSource.getConnection();
+			
+			System.out.println("[DbQuery] autocommit="+ conn.getAutoCommit());
 			try (Statement stmt = conn.createStatement();
 					ResultSet rs = stmt.executeQuery("select count(*) from MEMBER")) {
 				rs.next();

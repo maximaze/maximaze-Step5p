@@ -54,3 +54,29 @@ ds.setTestWhileIdle(true);
 ds.setMinEvictableIdleTimeMillis(60000*3);
 ds.setTimeBetweenEvictionRunsMillis(10*10000);
 return ds;
+
+--------------------------------------------------------------
+(@TransactionManagement을 이용한 트랜잭션 처리)
+1. 빈설정 : AppCtx.java
+	- @EnableTransactionManagement
+	- 플랫폼 트랜잭션 매니저
+		@Bean
+		public PlatformTransactionManager transactionManager() {
+			DataSourceTransactionManager tm = new DataSourceTransactionManager();
+			tm.setDataSource(dataSource());
+			return tm;
+		}
+		
+2. @Transactional 처리
+	- 트랜잭션을 처리한 메소드에 @Transactional을 지정
+	- 해당 메소드가 트랜잭션 단위로 처리가 됨
+	- 예제 : ChangePasswordService
+		@Transactional
+		public void changePassword(String email, String oldPwd, String newPwd) {
+			...
+		}
+
+
+
+
+

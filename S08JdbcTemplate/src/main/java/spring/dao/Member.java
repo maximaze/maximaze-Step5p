@@ -34,6 +34,10 @@ public class Member {
 	public Long getId() {
 		return id;
 	}
+	
+	public String setEmail(String string) {
+		return email;
+	}
 
 	public String getEmail() {
 		return email;
@@ -55,6 +59,13 @@ public class Member {
 		if (!password.equals(oldPassword))
 			throw new WrongIdPasswordException();
 		this.password = newPassword;
+	}
+	@Override
+	public String toString() {
+		String msg = String.format("id(%d), name(%s), email(%s), password(%s), regdate(%tF)",
+				this.id, this.name, this.email, this.password, this.registerDateTime);
+		
+		return msg;
 	}
 
 }

@@ -13,6 +13,7 @@ import spring.MemberPrinter;
 import spring.dao.MemberDao;
 import spring.service.ChangePasswordService;
 import spring.service.MemberRegisterService;
+import spring.service.TransactionalTestService;
 
 @Configuration
 @EnableTransactionManagement
@@ -32,7 +33,8 @@ public class AppCtx {
 		ds.setTimeBetweenEvictionRunsMillis(10 * 1000);	// 커센션 풀에 유휴 커넥션을 검사할 주기(밀리초) : 10초
 		return ds;
 	}
-
+	
+	// 플랫폼 트랜젝션 매니저
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();
@@ -73,5 +75,10 @@ public class AppCtx {
 		infoPrinter.setMemberDao(memberDao());
 		infoPrinter.setPrinter(memberPrinter());
 		return infoPrinter;
+	}
+	
+	@Bean
+	public TransactionalTestService transactionalTestService() {
+		return new TransactionalTestService(memberDao());
 	}
 }
