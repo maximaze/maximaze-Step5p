@@ -15,7 +15,7 @@ public class TransactionalTestService {
 	
 	@Transactional
 	public void transactionOne(Member member) {
-		System.out.println("[트렌젝션] 시작");
+		System.out.println("[트렌젝션] One");
 		
 		System.out.println("[트렌젝션] 입력");
 		this.memberDao.insert(member);
@@ -26,6 +26,21 @@ public class TransactionalTestService {
 		
 		System.out.println("[트렌젝션] 삭제");
 		this.memberDao.delete(member.getId());
+		
+		System.out.println("[트렌젝션] 종료");
+	}
+	
+	@Transactional
+	public void transactionTwo(Member member) {
+		System.out.println("[트렌젝션] Two");
+		
+		System.out.println("[트렌젝션] 입력");
+		this.memberDao.insert(member);
+		System.out.println("입력테이터 : " + member);
+		
+		System.out.println("[트렌젝션] 수정");
+		member.setPassword("4321");
+		this.memberDao.update(member);
 		
 		System.out.println("[트렌젝션] 종료");
 	}

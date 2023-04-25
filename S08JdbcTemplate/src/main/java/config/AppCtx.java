@@ -35,6 +35,7 @@ public class AppCtx {
 	}
 	
 	// 플랫폼 트랜젝션 매니저
+	// @Transactional 애너테이션의 작동을 위해 필요한 빈설정
 	@Bean
 	public PlatformTransactionManager transactionManager() {
 		DataSourceTransactionManager tm = new DataSourceTransactionManager();

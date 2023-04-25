@@ -97,7 +97,7 @@ public class MemberDao {
 
 	public List<Member> selectAll() {
 		List<Member> results = jdbcTemplate.query("select * from MEMBER",
-				(ResultSet rs, int rowNum) -> { // 람다식
+				(ResultSet rs, int rowNum) -> { // 람다식 / 값이 한개인걸 아니까 굳이 다른 정의를 하지 않아도 괜찮으니 나머지 생략가능
 					Member member = new Member(
 							rs.getString("EMAIL"),
 							rs.getString("PASSWORD"),
@@ -108,6 +108,25 @@ public class MemberDao {
 				});
 		return results;
 	}
+	
+	public List<Member> selectAll2() {
+		List<Member> results = jdbcTemplate.query("select * from MEMBER",
+				new RowMapper<Member>() {
+					
+					@Override
+					public Member mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Member member = new Member(
+							rs.getString("EMAIL"),
+							rs.getString("PASSWORD"),
+							rs.getString("NAME"),
+							rs.getTimestamp("REGDATE").toLocalDateTime());
+					member.setId(rs.getLong("ID"));
+					return member;
+					}
+				});
+		return results;
+	}
+	
 
 	public int count() {
 		Integer count = jdbcTemplate.queryForObject(
