@@ -4,11 +4,13 @@
  */
 package dbquery;
 
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.sql.DataSource;
 
@@ -203,5 +205,35 @@ public class DbQueryTR {
 				se.printStackTrace();
 			}
 		}
+	}
+	
+	public List<Member> selectAll() {
+		List<Member> lists = new ArrayList<Member>();
+		Connection conn = null;
+		
+		try {
+			conn = dataSource.getConnection();
+			try(Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery("select * from MEMBER")){
+				
+				while(rs.next()) {
+					Member member = new Member(rs.getLong("ID"), rs.getString("EMAIL"), rs.getString("PASSWORD"), 
+							rs.getString("NAME"), rs.getTimestamp("REGDATE").toLocalDateTime());
+					lists.add(member);
+				}
+			}
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				}
+				catch (SQLException e) {
+				}
+			}
+		}
+		return lists;
 	}
 }

@@ -1,9 +1,9 @@
 [S08JdbcTemplate]
 
 1. DataSource
-2. JdbcTemplate Äõ¸®
-3. DB °ü·Ã Exception
-4. Transaction Ã³¸®
+2. JdbcTemplate ì¿¼ë¦¬
+3. DB ê´€ë ¨ Exception
+4. Transaction ì²˜ë¦¬
 
 (MEMBER TABLE)
 DROP TABLE MEMBER;
@@ -17,7 +17,7 @@ CREATE TABLE MEMBER
     CONSTRAINT PK_MEMBER_ID PRIMARY KEY(ID) 
 );
 
--- MEMBER.ID ½ÃÄö½º
+-- MEMBER.ID ì‹œí€€ìŠ¤
 DROP SEQUENCE MEMBER_ID_SEQ;
 CREATE SEQUENCE MEMBER_ID_SEQ
 	START WITH 1
@@ -56,10 +56,10 @@ ds.setTimeBetweenEvictionRunsMillis(10*10000);
 return ds;
 
 --------------------------------------------------------------
-(@TransactionManagementÀ» ÀÌ¿ëÇÑ Æ®·£Àè¼Ç Ã³¸®)
-1. ºó¼³Á¤ : AppCtx.java
+(@TransactionManagementì„ ì´ìš©í•œ íŠ¸ëœì­ì…˜ ì²˜ë¦¬)
+1. ë¹ˆì„¤ì • : AppCtx.java
 	- @EnableTransactionManagement
-	- ÇÃ·§Æû Æ®·£Àè¼Ç ¸Å´ÏÀú
+	- í”Œë«í¼ íŠ¸ëœì­ì…˜ ë§¤ë‹ˆì €
 		@Bean
 		public PlatformTransactionManager transactionManager() {
 			DataSourceTransactionManager tm = new DataSourceTransactionManager();
@@ -67,10 +67,10 @@ return ds;
 			return tm;
 		}
 		
-2. @Transactional Ã³¸®
-	- Æ®·£Àè¼ÇÀ» Ã³¸®ÇÑ ¸Ş¼Òµå¿¡ @TransactionalÀ» ÁöÁ¤
-	- ÇØ´ç ¸Ş¼Òµå°¡ Æ®·£Àè¼Ç ´ÜÀ§·Î Ã³¸®°¡ µÊ
-	- ¿¹Á¦ : ChangePasswordService
+2. @Transactional ì²˜ë¦¬
+	- íŠ¸ëœì­ì…˜ì„ ì²˜ë¦¬í•œ ë©”ì†Œë“œì— @Transactionalì„ ì§€ì •
+	- í•´ë‹¹ ë©”ì†Œë“œê°€ íŠ¸ëœì­ì…˜ ë‹¨ìœ„ë¡œ ì²˜ë¦¬ê°€ ë¨
+	- ì˜ˆì œ : ChangePasswordService
 		@Transactional
 		public void changePassword(String email, String oldPwd, String newPwd) {
 			...

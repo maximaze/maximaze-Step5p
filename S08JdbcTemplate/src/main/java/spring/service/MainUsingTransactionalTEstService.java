@@ -1,4 +1,4 @@
-package main;
+package spring.service;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import config.AppCtx;
 import dbquery.DbQueryTR;
 import spring.dao.Member;
-import spring.service.TransactionalTestService;
 
 public class MainUsingTransactionalTEstService {
 
