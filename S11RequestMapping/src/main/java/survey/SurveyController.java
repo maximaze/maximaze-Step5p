@@ -30,6 +30,7 @@ public class SurveyController {
 
 	@PostMapping
 	public String submit(@ModelAttribute("ansData") AnsweredData data) {
+		System.out.println("[SurveyController] summit: POST THEOD");
 		return "survey/submitted";
 	}
 

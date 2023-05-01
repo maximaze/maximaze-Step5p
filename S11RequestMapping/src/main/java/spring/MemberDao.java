@@ -51,7 +51,7 @@ public class MemberDao {
 				// 파라미터로 전달받은 Connection을 이용해서 PreparedStatement 생성
 				PreparedStatement pstmt = con.prepareStatement(
 						"insert into MEMBER (ID, EMAIL, PASSWORD, NAME, REGDATE) " +
-						"values (member_id_seq.nextval?, ?, ?, ?)",
+						"values (member_id_seq.nextval,?, ?, ?, ?)",
 						new String[] { "ID" });
 				// 인덱스 파라미터 값 설정
 				pstmt.setString(1, member.getEmail());
