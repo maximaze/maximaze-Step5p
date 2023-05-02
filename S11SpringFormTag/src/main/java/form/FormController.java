@@ -8,20 +8,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/form")
 public class FormController {
-
+	/*
 	@ModelAttribute("formCommand")
 	public FormCommand createCommand() {
+		System.out.println("[FormController] createCommand : @ModelAttribute");
 		return new FormCommand();
 	}
-
+	 */
 	@GetMapping
 	public String form(Model model,FormCommand formCmd) {
-		formCmd.setLoginType("기업회원");
+	// public String form(Model model) {
+		System.out.println("[FormControll] form : GET METHOD");
+		
+		//formCmd.setLoginType("기업회원");
+		formCmd.setLoginType("헤드헌터회원");
+		
 		List<String> loginTypes = new ArrayList<String>();
 		loginTypes.add("일반회원");
 		loginTypes.add("기업회원");
@@ -38,5 +45,11 @@ public class FormController {
 				new Code("01", "윈도우8"),
 				new Code("02", "윈도우10")));
 		return "form"; // WEB-INF/view/form.jsp
+	}
+	
+	@PostMapping
+	public String submit(@ModelAttribute("formCommand") FormCommand data) {
+		System.out.println("[SurveyController] submit: POST METHOD");
+		return "FormSubmitted";
 	}
 }

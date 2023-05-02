@@ -23,6 +23,18 @@
 10. <form:form> 커스텀 태그와 HTML 일반 태그 혼용 가능
 
 -----------------------------------------------------------------------------------
+(스프링 폼 태그에서 MoelAttribute 사용하기)
+	@ModelAttribute("formCommand")
+	public FormCommand createCommand(){
+	System.out.println("[FormController] createCommand : @ModelAttribute");
+	return new FormCommand();
+	}
+	
+	@GetMapping
+	public String form(Model model, FormCommand formCommand){
+	}
+-----------------------------------------------------------------------------------
+
 (실행)
 1. http://localhost:8584/S11SpringFormTag/form
 2. 요청: FormController.java
